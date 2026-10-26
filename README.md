@@ -1,6 +1,6 @@
 # Input Buffer
 
-A Geode mod for Geometry Dash 2.2081 (Windows) that makes tight timings easier.
+A Geode mod for Geometry Dash 2.2081 on Windows and iOS that makes tight timings easier.
 
 If you click slightly too early, the mod remembers the click and fires it the moment you land or touch an orb. In ship, UFO, swing and wave it makes very quick taps come out consistent.
 
@@ -28,15 +28,16 @@ Switching wave mode in the middle of a wave section can cause one odd click, so 
 
 ## Install
 
-1. You need Geometry Dash 2.2081 on Windows with the [Geode](https://geode-sdk.org) loader installed.
-2. Download `lyophi.buffermod.geode` from the [Releases](../../releases) page.
-3. Put it in the `geode/mods` folder inside your Geometry Dash folder, then restart the game.
+1. You need Geometry Dash 2.2081 with Geode 5.11.2 installed.
+2. On Windows, download `lyophi.buffermod.geode` from the [Releases](../../releases) page.
+3. On iOS, download the `.geode` file from the `Input-Buffer-iOS-Geode` artifact in the iOS GitHub Actions build, then import it through Geode iOS Launcher.
+4. On Windows, put the file in the `geode/mods` folder inside your Geometry Dash folder, then restart the game.
 
 The mod appears as **Input Buffer** in the Geode mod list.
 
 ## Settings
 
-Open them from the Geode mod list, or press the **Buffer** button on the pause menu. The **Profiles** button next to it saves and loads sets of settings.
+Open them from the Geode mod list, or tap **Buffer** on the pause menu. On iOS, a small **Buffer** button is also available during gameplay; it pauses the run and opens the touch settings menu. The **Profiles** button on the pause menu saves and loads sets of settings.
 
 - **Main Buffer Window:** the default window (2, 4, 8 or 16 ticks, or Off).
 - **Per-mode windows:** every mode has its own window in ticks. `-1` uses the main window, `0` turns that mode off, and `1` or more is your own value. Wave is capped at 8 ticks when set to `-1`.
@@ -73,12 +74,13 @@ Smaller windows feel more natural. Larger windows are more forgiving but can fir
 | F7 / F8 | TPS up / down |
 | F9 | Toggle debug logging |
 | F10 | Cycle wave mode |
+| F11 | Add a level section at your current position |
 
-Hotkeys only act while you are inside a level, and you can rebind them in the settings.
+Hotkeys only act while you are inside a level, and you can rebind them in the settings. They are optional; on iOS, use the touch-accessible Buffer and Profiles menus instead.
 
 ## Known limitations
 
-- The mod is built for Windows. Hotkeys use Geode's keybind system, but other platforms are untested.
+- iOS gameplay controls are touch-based; F6–F11 are optional keyboard shortcuts. JIT-less Geode installations may require an up-to-date Geode iOS Launcher to import and sign mods correctly.
 - The TPS setting is typed by hand and must be kept in sync with your real TPS.
 - Dual portal support is experimental and off by default. In levels with mixed modes on the two icons, expect some rough edges.
 - Delayed inputs are injected by the mod, so effects that depend on the original input event may not see them at the exact moment.

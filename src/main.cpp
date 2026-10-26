@@ -1533,6 +1533,16 @@ class $modify(BufferPause, PauseLayer) {
 // Raises the reset flag on death, restart and checkpoint loads. The buffer
 // layer clears its state on the next step.
 class $modify(BufferReset, PlayLayer) {
+    struct Fields {
+        bool touchBufferButtonAdded = false;
+    };
+
+    void onTouchBufferSettings(CCObject*) {
+        int levelID = currentLevelID();
+        this->pauseGame(false);
+        if (auto popup = BufferPopup::create(levelID)) popup->show();
+    }
+
     void resetLevel() {
         PlayLayer::resetLevel();
         g_resetEpoch++;
@@ -1578,6 +1588,22 @@ class $modify(BufferReset, PlayLayer) {
     // Applies the profile linked to this level, if there is one.
     void setupHasCompleted() {
         PlayLayer::setupHasCompleted();
+#if defined(GEODE_IS_IOS)
+        if (!m_fields->touchBufferButtonAdded) {
+            auto menu = CCMenu::create();
+            auto sprite = ButtonSprite::create("Buffer");
+            sprite->setScale(0.7f);
+            auto button = CCMenuItemSpriteExtra::create(
+                sprite, this, menu_selector(BufferReset::onTouchBufferSettings)
+            );
+            menu->addChild(button);
+
+            auto win = CCDirector::get()->getWinSize();
+            menu->setPosition({win.width - 50.f, win.height - 48.f});
+            this->addChild(menu, 10000);
+            m_fields->touchBufferButtonAdded = true;
+        }
+#endif
         if (!m_level) return;
         int id = levelKeyFor(m_level);
         if (id == 0) return;

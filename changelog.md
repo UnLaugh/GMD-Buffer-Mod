@@ -1,3 +1,7 @@
+## v1.1.1
+- **iOS touch control:** added a small in-level Buffer button that pauses the run and opens the settings menu without requiring a hardware keyboard.
+- **iOS support:** documented the iOS build and clarified that F6–F11 are optional shortcuts; the mod’s settings and profiles are available through touch menus.
+
 ## v1.1.0
 - **Fixed:** the buffer did not help when you jumped with a **Jump P2** keybind in a normal one-player level. The game applies that input to player 1, but the mod was helping the hidden second icon, so clicks never got buffered. Thanks to manty987 for the report and the fix.
 - **New Buffer menu:** the pause menu's Buffer button now opens a simple window with **Basic** and **Advanced** tabs. Basic has a Quick setup (Off, Strict, Standard, Relaxed, Very relaxed) and your TPS. Advanced has the experimental switches, shortcuts to Profiles, Sections and all settings, and Reset all.
