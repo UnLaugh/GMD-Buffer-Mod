@@ -1,0 +1,33 @@
+name: Build Input Buffer for iOS
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "mod.json"
+      - "CMakeLists.txt"
+      - "src/**"
+      - ".github/workflows/build-ios.yml"
+
+jobs:
+  build:
+    name: iOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Build iOS Geode mod
+        id: build
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          target: iOS
+          sdk: given
+          bindings-ref: 1605f500d053f8de122bf5c7dc6d17c24866e02e
+          configure-args: -DSKIP_BUILDING_CODEGEN=OFF
+
+      - name: Upload .geode package
+        uses: actions/upload-artifact@v7
+        with:
+          name: Input-Buffer-iOS-Geode
+          path: ${{ steps.build.outputs.build-output }}
+          if-no-files-found: error
